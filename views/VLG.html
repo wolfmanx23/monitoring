@@ -1,0 +1,189 @@
+<table style="width:100%" align="left">
+    <thead>
+      <tr>
+        <th>
+          <object type="image/svg+xml" data="image.svg">
+            <!-- Your fall back here -->
+            <img width="150" height="60" src="https://www.prime-alliance.org/wp-content/uploads/2020/11/IBM-LOGO.png">
+          </object>
+        </th>
+        <th><h1>Dimensionamiento Orquestadores de Contenedores</h1></th>
+      </tr>
+    </thead>
+  </table>
+
+<p>
+Vamos a dimensionar IBM Cloud Monitoring with Sysdig </p>
+<p>
+<form action="https://ui.9sxuen7c9q9.us-south.codeengine.appdomain.cloud/" method="get">
+    <button type="submit"> <-- Regresar </button>
+    </form>
+    </p>
+    <p style="font-style: italic;">
+    NOTAS:<br>
+    *Los precios lista que se presentarán son calculados y pueden variar respecto a los presentados en IBM Cloud en +-20%<br>
+    **Para procesos de special bid es requerido obtener los precios lista desde cloud.ibm.com<br>
+    </p>
+    <table style="width:100%" align="center">
+    <form id="VAT" name="" method="post">
+    <table style="width:100%" align="left">
+      <tr>
+        <th bgcolor="#00008B" style="color: white" >Parámetros Clúster</th>
+      </tr>
+      <tr>
+      <table style="width:100%" align="center">
+      <tr>
+      <th bgcolor="#00008B" style="color: white" >IBM Cloud Monitoring with Sysdig</th>
+    </tr>
+      </tr>
+      <tr>
+        <td>
+            <!-- tabla parametros del clúster -->
+            <table style="width:100%" bgcolor="#00008B" align="center">
+              <tr>
+                <th bgcolor="#00008B" style="color: white;" >Parámetro</th>
+                <th bgcolor="#00008B" style="color: white;">Valor</th>
+              </tr>
+               <tr>
+                <td style="color: white;" align="center">Node</td>
+                <td>
+                <input type="number" name="" id="N" autofocus placeholder="Node"> 
+                <tr>
+                <td style="color: white;" align="center">Lite node</td>
+                <td>
+                <input type="number" name="" id="NL" autofocus placeholder="Lite node">
+                <tr>
+                <td style="color: white;" align="center">Container</td>
+                <td>
+                <input type="number" name="" id="CH" autofocus placeholder="Container">
+                <tr>
+                <td style="color: white;" align="center">API Call</td>
+                <td>
+                <input type="number" name="" id="API" autofocus placeholder="API´s">
+                <tr>
+                <td style="color: white;" align="center">Time series hour</td>
+                <td>
+                <input type="number" name="" id="ST" autofocus placeholder="Time series">
+                <tr>
+                <td style="color: white;" align="center">Región</td>
+                <td>
+                  <select name="region" id="region">
+                   <option value="mexico">US-South</option>
+                    <option value="mexico">Us-East</option>
+                    
+                  </select>
+                </td>
+              </tr>
+    
+              <tr>
+                <td style="color: white;" align="center">Precios del País</td>
+                <td>
+                  <select name="preciopais" id="preciopais">
+                    <option value="mexico" align="center">México</option>
+                  </select>
+                </td>
+                <td>
+                <button type="button" onclick="CLO();">Quiero mi cotización</button>
+                </tb>  
+                </tr>
+            
+    <tr>
+        <th bgcolor="#00008B" style="color: white; width:100%" align="left" >Parametros por horas al mes (720hrs)</th>
+      </tr>
+      </table>
+      <table  style="width:100%" align="left">
+        <thead>
+          <tr>
+            <th bgcolor="#00008B" style="color: white;">Node hour</th>
+            <th bgcolor="#00008B" style="color: white;">Lite node hour</th>
+            <th bgcolor="#00008B" style="color: white;">Container hour</th>
+            <th bgcolor="#00008B" style="color: white;">Time series hour</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td><label id="labelhn"></id></td>
+            <td><label id="labelhnl"></td>
+            <td><label id="labelhch"></td>
+            <td><label id="labelhst"></td>
+            
+          
+            
+            </tr>
+    </table>
+
+    <table style="width:100%" align="left">
+        <th bgcolor="#00008B" style="color: white" >Precio estimado por mes ($USD)</th>
+       <tbody>
+            <tr>
+       <td><label id="total"></td>
+       </tr>
+      </table>
+        </form>
+    <script>
+    function CLO(){
+
+         var n = parseInt(document.getElementById('N').value);
+         var nl = parseInt(document.getElementById('NL').value);
+         var ch = parseInt(document.getElementById('CH').value);
+         var st = parseInt(document.getElementById('ST').value);
+         var api = parseInt(document.getElementById('API').value);  
+         if (isNaN(n)) {
+    n=0;
+  } else {
+    n=n; 
+  }
+   if (isNaN(nl)) {
+    nl=0;
+  } else {
+    nl=nl; 
+  }
+   if (isNaN(ch)) {
+    ch=0;
+  } else {
+    ch=ch; 
+  }
+   if (isNaN(st)) {
+    st=0;
+  } else {
+    st=st; 
+  }
+   if (isNaN(api)) {
+    api=0;
+  } else {
+    api=api; 
+  }
+         var hn= n*720;
+         var hnl= nl*720;
+         var hch= ch*720;
+         var tst= st*720;
+         if (tst<=1000)
+         var ptst=0.000111;
+         else 
+         if (tst>1000 && tst<=10000)
+         ptst=0.000069;
+         else 
+         if (tst>10000 && tst<=100000)
+         ptst=0.000042;
+         else
+         if (tst=1)
+         ptst=0.000028;
+     
+         var tn=(hn*0.048);
+         var tnl=(hnl*0.013);
+         var tch=(hch*0.000694);
+         var cst=((tn+tnl)*tst*ptst);
+         var tapi= (api*0.00001);
+         var total= tn+tnl+tch+cst+tapi;
+         document.getElementById('total').innerHTML=Math.round(total)* 100 / 100;
+
+         document.getElementById('labelhn').innerHTML=Math.round(hn)* 100 / 100;
+         document.getElementById('labelhnl').innerHTML=Math.round(hnl)* 100 / 100;
+         document.getElementById('labelhch').innerHTML=Math.round(hch)* 100 / 100;
+         document.getElementById('labelhst').innerHTML=Math.round(tst)* 100 / 100;
+     
+         
+         }
+    </script>
+    </body>
+    </html>
